@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # HomeKit Catalog - 2.0
 
 HomeKit Catalog demonstrates how to use the HomeKit API, to create homes, to associate accessories with homes, to associate accessories with homes, to group the accessories into rooms and zones, to create actions sets to tie together multiple actions, to create timer triggers to fire actions sets at specific times, and to create service groups to group services into contexts.
@@ -60,3 +61,6 @@ If you find any problems with this sample, please file a bug against it.
 
 1.0 (Dec 2014) First shipping version of this sample.
 2.0 (Jun 2015) Updated for new event and location triggers, accessory types, and Swift 2.0.
+=======
+# Homekit
+ITRI Homekit research
