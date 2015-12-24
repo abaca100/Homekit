@@ -35,6 +35,7 @@ class HMCatalogViewController: UITableViewController, HMHomeDelegate {
                     and the `home` is nil; `false` otherwise.
     */
     private func shouldPopViewController() -> Bool {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         if let rootViewController = navigationController?.viewControllers.first
             where rootViewController == self {
                 return false
@@ -47,11 +48,19 @@ class HMCatalogViewController: UITableViewController, HMHomeDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         if shouldPopViewController() {
             // Pop to root view controller if our home was destroyed while we were away.
-            navigationController?.popToRootViewControllerAnimated(true)
-            return
+//            navigationController?.popToRootViewControllerAnimated(true)
+//            return
         }
+
+        for h in homeStore.homeManager.homes
+        {
+            print("homeStore.homeManager.homes=\(h)")
+        }
+        
+        print("homeStore.home=\(homeStore.home)")
 
         registerAsDelegate()
     }
@@ -67,7 +76,9 @@ class HMCatalogViewController: UITableViewController, HMHomeDelegate {
         
         This method will be called when the view appears.
     */
-    func registerAsDelegate() {
+    func registerAsDelegate()
+    {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         homeStore.home?.delegate = self
     }
 }

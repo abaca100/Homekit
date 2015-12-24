@@ -36,11 +36,20 @@ class HomeListViewController: HMCatalogViewController, HMHomeManagerDelegate {
         tableView.estimatedRowHeight = 44.0
         
         tableView.rowHeight = UITableViewAutomaticDimension
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
+
+        for h in homeStore.homeManager.homes
+        {
+            print("\(h)")
+        }
+        
+        print("\(homeStore.home)")
     }
     
     /// Resets the list of homes (which will update the view).
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         resetHomesList()
     }
     
@@ -144,7 +153,15 @@ class HomeListViewController: HMCatalogViewController, HMHomeManagerDelegate {
         The list is then sorted and the view is reloaded.
     */
     private func resetHomesList() {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         homes = homeManager.homes.sort(orderHomes)
+
+        for h in homeStore.homeManager.homes
+        {
+            print("\(h)")
+        }
+        
+        print("\(homeStore.home)")
         tableView.reloadData()
     }
     
@@ -203,6 +220,7 @@ class HomeListViewController: HMCatalogViewController, HMHomeManagerDelegate {
     
     /// Finds the cell with corresponds to the provided home and reloads it.
     func homeDidUpdateName(home: HMHome) {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         if let homeIndex = homes.indexOf(home) {
             let indexPath = NSIndexPath(forRow: homeIndex, inSection: 0)
           
@@ -220,6 +238,7 @@ class HomeListViewController: HMCatalogViewController, HMHomeManagerDelegate {
         if the home store's current home is no longer in the home manager's list of homes.
     */
     func homeManagerDidUpdateHomes(manager: HMHomeManager) {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         registerAsDelegate()
         resetHomesList()
         
@@ -232,6 +251,7 @@ class HomeListViewController: HMCatalogViewController, HMHomeManagerDelegate {
     
     /// Registers for the delegate of the new home and updates the view.
     func homeManager(manager: HMHomeManager, didAddHome home: HMHome) {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         home.delegate = self
 
         didAddHome(home)
@@ -244,6 +264,7 @@ class HomeListViewController: HMCatalogViewController, HMHomeManagerDelegate {
         all modals views and pop all detail views.
     */
     func homeManager(manager: HMHomeManager, didRemoveHome home: HMHome) {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         didRemoveHome(home)
         
         guard let selectedHome = homeStore.home where home == selectedHome else { return }

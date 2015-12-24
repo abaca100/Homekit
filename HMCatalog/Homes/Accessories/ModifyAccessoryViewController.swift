@@ -57,10 +57,21 @@ class ModifyAccessoryViewController: HMCatalogViewController, HMAccessoryDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
+
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        selectedRoom = accessory.room ?? home.roomForEntireHome()
+//        print("accessory.room=\(accessory.room), home.roomForEntireHome()=\(home.roomForEntireHome())")
+        
+//        selectedRoom = accessory.room ?? home.roomForEntireHome()\
+        
+        if let home = homeStore.home
+        {
+            print("\(home)")
+            selectedRoom = home.rooms[0]
+        }
+        
         
         // If the accessory belongs to the home already, we are in 'edit' mode.
         editingExistingAccessory = accessoryHasBeenAddedToHome()

@@ -9,7 +9,7 @@
 import HomeKit
 
 /// A static, singleton class which holds a home manager and the current home.
-class HomeStore: NSObject, HMHomeManagerDelegate {
+class HomeStore: NSObject {
     static let sharedStore = HomeStore()
     
     // MARK: Properties
