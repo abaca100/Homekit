@@ -30,10 +30,12 @@ extension HMHome {
     var serviceTable: [String: [HMService]] {
         var serviceDictionary = [String: [HMService]]()
         for service in self.allServices {
+            print("service.name=\(service.name)")
             if !service.isControlType {
                 continue
             }
             
+            print("service.localizedDescription=\(service.localizedDescription)")
             let serviceType = service.localizedDescription
             var existingServices: [HMService] = serviceDictionary[serviceType] ?? [HMService]()
             existingServices.append(service)

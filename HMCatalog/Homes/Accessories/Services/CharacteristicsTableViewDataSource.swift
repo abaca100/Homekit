@@ -104,6 +104,7 @@ class CharacteristicsTableViewDataSource: NSObject, UITableViewDelegate, UITable
         - returns:  The localized service type in that row, or 'None'.
     */
     func displayedServiceTypeForRow(row: Int) -> String {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         let serviceTypes = HMService.validAssociatedServiceTypes
         if row < serviceTypes.count {
             return HMService.localizedDescriptionForServiceType(serviceTypes[row])
@@ -120,6 +121,7 @@ class CharacteristicsTableViewDataSource: NSObject, UITableViewDelegate, UITable
         - returns:  `true` if the current row is a valid service type, `false` otherwise
     */
     func serviceTypeIsSelectedForRow(row: Int) -> Bool {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         let serviceTypes = HMService.validAssociatedServiceTypes
         if row >= serviceTypes.count {
             return service.associatedServiceType == nil
@@ -133,7 +135,10 @@ class CharacteristicsTableViewDataSource: NSObject, UITableViewDelegate, UITable
     }
     
     /// Generates a cell for an associated service.
-    private func tableView(tableView: UITableView, associatedServiceTypeCellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    private func tableView(tableView: UITableView, associatedServiceTypeCellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        print("----------------------------------------------------------------------")
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifiers.serviceTypeCell, forIndexPath: indexPath)
         
         cell.textLabel?.text = displayedServiceTypeForRow(indexPath.row)
@@ -146,8 +151,10 @@ class CharacteristicsTableViewDataSource: NSObject, UITableViewDelegate, UITable
         Generates a characteristic cell based on the type of characteristic
         located at the specified index path.
     */
-    private func tableView(tableView: UITableView, characteristicCellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    private func tableView(tableView: UITableView, characteristicCellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let characteristic = service.characteristics[indexPath.row]
+        //print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__):\(characteristic)")
 
         var reuseIdentifier = Identifiers.characteristicCell
         
@@ -177,12 +184,16 @@ class CharacteristicsTableViewDataSource: NSObject, UITableViewDelegate, UITable
     }
     
     /// Uses convenience methods to generate a cell based on the index path's section.
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+//        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         switch CharacteristicTableViewSection(rawValue: indexPath.section) {
             case .Characteristics?:
+//                print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)(\("Characteristics"))")
                 return self.tableView(tableView, characteristicCellForRowAtIndexPath: indexPath)
                 
             case .AssociatedServiceType?:
+                print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__).type=(\("AssociatedServiceType"))")
                 return self.tableView(tableView, associatedServiceTypeCellForRowAtIndexPath: indexPath)
             
             case nil:

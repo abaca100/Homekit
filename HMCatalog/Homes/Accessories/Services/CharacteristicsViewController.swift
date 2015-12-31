@@ -32,7 +32,7 @@ class CharacteristicsViewController: HMCatalogViewController, HMAccessoryDelegat
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         title = service.name
-        setNotificationsEnabled(true)
+        //setNotificationsEnabled(true)
         reloadTableView()
     }
     
@@ -57,7 +57,18 @@ class CharacteristicsViewController: HMCatalogViewController, HMAccessoryDelegat
         - parameter notificationsEnabled: A `Bool`; whether to enable or disable.
     */
     func setNotificationsEnabled(notificationsEnabled: Bool) {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)(\(notificationsEnabled))")
         for characteristic in service.characteristics {
+            
+//            print("----------------------------------------------------------------------")
+//            print("characteristic.service.name=\(characteristic.service?.name)")
+//            print("characteristic.service.serviceType=\(characteristic.service?.serviceType)")
+//            print("characteristic.service.associatedServiceType=\(characteristic.service?.associatedServiceType)")
+//            print("characteristic.service.characteristics=\(characteristic.service?.characteristics)")
+//            print("characteristic.properties=\(characteristic.properties)")
+//            print("characteristic.characteristicType=\(characteristic.characteristicType)")
+//            print("characteristic.metadata=\(characteristic.metadata)")
+            
             if characteristic.supportsEventNotification {
                 characteristic.enableNotification(notificationsEnabled) { error in
                     if let error = error {

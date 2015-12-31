@@ -46,9 +46,9 @@ class HMCatalogViewController: UITableViewController, HMHomeDelegate {
 
     /// Pops the view controller, if required. Invokes the delegate registration method.
     override func viewWillAppear(animated: Bool) {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)-HMCatalogViewController")
         super.viewWillAppear(animated)
 
-        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         if shouldPopViewController() {
             // Pop to root view controller if our home was destroyed while we were away.
 //            navigationController?.popToRootViewControllerAnimated(true)
@@ -57,10 +57,10 @@ class HMCatalogViewController: UITableViewController, HMHomeDelegate {
 
         for h in homeStore.homeManager.homes
         {
-            print("homeStore.homeManager.homes=\(h)")
+            print("\t.\(__FUNCTION__):homeStore.homeManager.homes=\(h)")
         }
         
-        print("homeStore.home=\(homeStore.home)")
+        print("\t.\(__FUNCTION__):homeStore.home=\(homeStore.home)")
 
         registerAsDelegate()
     }

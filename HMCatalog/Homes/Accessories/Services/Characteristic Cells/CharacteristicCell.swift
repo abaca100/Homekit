@@ -122,7 +122,7 @@ class CharacteristicCell: UITableViewCell {
             }
             
             // Set initial state of the favorite button
-            favoriteButton.selected = characteristic.isFavorite
+            //favoriteButton.selected = characteristic.isFavorite
             
             // "Enable" the cell if the accessory is reachable or we are displaying the favorites.
             
@@ -157,7 +157,7 @@ class CharacteristicCell: UITableViewCell {
     */
     @IBAction func didTapFavoriteButton(sender: UIButton) {
         sender.selected = !sender.selected
-        characteristic.isFavorite = sender.selected
+        //characteristic.isFavorite = sender.selected
     }
     
     /**

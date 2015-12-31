@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, HMHomeManagerDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         self.homeManager = HMHomeManager()
         self.homeManager?.delegate = self
 
@@ -32,11 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, HMHomeManagerDelegate {
     
     func homeManagerDidUpdateHomes(manager: HMHomeManager)
     {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         NSNotificationCenter.defaultCenter().postNotificationName("UpdateHomesNotification", object: self)
     }
     
     func homeManagerDidUpdatePrimaryHome(manager: HMHomeManager)
     {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         NSNotificationCenter.defaultCenter().postNotificationName("UpdatePrimaryHomeNotification", object: self)
     }
     

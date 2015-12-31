@@ -12,7 +12,7 @@ import HomeKit
 class AccessoryUpdateController: NSObject, CharacteristicCellDelegate {
     // MARK: Properties
     
-    let updateQueue = dispatch_queue_create("com.sample.HMCatalog.CharacteristicUpdateQueue", DISPATCH_QUEUE_SERIAL)
+    let updateQueue = dispatch_queue_create("org.itri.HMCatalog.CharacteristicUpdateQueue", DISPATCH_QUEUE_SERIAL)
     
     lazy var pendingWrites = [HMCharacteristic:AnyObject]()
     lazy var sentWrites = [HMCharacteristic:AnyObject]()
@@ -23,11 +23,19 @@ class AccessoryUpdateController: NSObject, CharacteristicCellDelegate {
     /// Starts the update timer on creation.
     override init() {
         super.init()
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         startListeningForCellUpdates()
     }
     
+//    deinit {
+//        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
+//        stopListeningForCellUpdates()
+//    }
+    
     /// Responds to a cell change, and if the update was marked immediate, updates the characteristics.
-    func characteristicCell(cell: CharacteristicCell, didUpdateValue value: AnyObject, forCharacteristic characteristic: HMCharacteristic, immediate: Bool) {
+    func characteristicCell(cell: CharacteristicCell, didUpdateValue value: AnyObject, forCharacteristic characteristic: HMCharacteristic, immediate: Bool)
+    {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         pendingWrites[characteristic] = value
         if immediate {
             updateCharacteristics()
@@ -40,7 +48,9 @@ class AccessoryUpdateController: NSObject, CharacteristicCellDelegate {
         If there is a pending write request on the same characteristic, the read is ignored to prevent
         "UI glitching".
     */
-    func characteristicCell(cell: CharacteristicCell, readInitialValueForCharacteristic characteristic: HMCharacteristic, completion: (AnyObject?, NSError?) -> Void) {
+    func characteristicCell(cell: CharacteristicCell, readInitialValueForCharacteristic characteristic: HMCharacteristic, completion: (AnyObject?, NSError?) -> Void)
+    {
+        //print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         characteristic.readValueWithCompletionHandler { error in
             dispatch_sync(self.updateQueue) {
                 if let sentValue = self.sentWrites[characteristic] {
@@ -56,17 +66,22 @@ class AccessoryUpdateController: NSObject, CharacteristicCellDelegate {
     }
 
     /// Creates and starts the update value timer.
-    func startListeningForCellUpdates() {
+    func startListeningForCellUpdates()
+    {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         updateValueTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "updateCharacteristics", userInfo: nil, repeats: true)
     }
     
     /// Invalidates the update timer.
-    func stopListeningForCellUpdates() {
+    func stopListeningForCellUpdates()
+    {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         updateValueTimer.invalidate()
     }
     
     /// Sends all pending requests in the array.
-    func updateCharacteristics() {
+    func updateCharacteristics()
+    {
         dispatch_sync(updateQueue) {
             for (characteristic, value) in self.pendingWrites {
                 self.sentWrites[characteristic] = value
@@ -90,7 +105,8 @@ class AccessoryUpdateController: NSObject, CharacteristicCellDelegate {
         - parameter characteristic: The `HMCharacteristic` to add.
         - parameter value: The value of the `characteristic`.
     */
-    func didSendWrite(characteristic: HMCharacteristic, value: AnyObject) {
+    func didSendWrite(characteristic: HMCharacteristic, value: AnyObject)
+    {
         dispatch_sync(updateQueue) {
             self.sentWrites[characteristic] = value
         }
@@ -102,7 +118,8 @@ class AccessoryUpdateController: NSObject, CharacteristicCellDelegate {
         - parameter characteristic: The `HMCharacteristic` to remove.
         - parameter value: The value of the `characteristic` (unused, but included for clarity).
     */
-    func didCompleteWrite(characteristic: HMCharacteristic, value: AnyObject) {
+    func didCompleteWrite(characteristic: HMCharacteristic, value: AnyObject)
+    {
         dispatch_sync(updateQueue) {
             self.sentWrites.removeValueForKey(characteristic)
         }

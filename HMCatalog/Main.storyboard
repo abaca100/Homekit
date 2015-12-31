@@ -2274,16 +2274,16 @@
         <image name="SelectedFavoritesTabIcon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vco-xg-mBS"/>
-        <segue reference="XMQ-LX-TnC"/>
-        <segue reference="yyn-7s-bjY"/>
         <segue reference="nsB-DH-ErO"/>
-        <segue reference="l7S-Nc-N1P"/>
-        <segue reference="GZk-pK-8ga"/>
-        <segue reference="4hO-Ue-P0x"/>
-        <segue reference="eFv-LF-Aq8"/>
+        <segue reference="qzE-YI-WRP"/>
+        <segue reference="UBP-oF-dww"/>
         <segue reference="8aB-qv-NyG"/>
-        <segue reference="ChR-Cr-psn"/>
+        <segue reference="GZk-pK-8ga"/>
+        <segue reference="Vco-xg-mBS"/>
+        <segue reference="l7S-Nc-N1P"/>
+        <segue reference="XMQ-LX-TnC"/>
+        <segue reference="4hO-Ue-P0x"/>
         <segue reference="yUW-jy-m4o"/>
+        <segue reference="ChR-Cr-psn"/>
     </inferredMetricsTieBreakers>
 </document>

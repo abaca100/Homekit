@@ -48,6 +48,7 @@ class ServicesViewController: HMCatalogViewController, HMAccessoryDelegate {
     
     /// Reloads the view.
     override func viewWillAppear(animated: Bool) {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         super.viewWillAppear(animated)
         updateTitle()
         reloadData()

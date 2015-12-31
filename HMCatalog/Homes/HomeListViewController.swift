@@ -31,25 +31,26 @@ class HomeListViewController: HMCatalogViewController, HMHomeManagerDelegate {
     
     /// Configures the table view.
     override func viewDidLoad() {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         super.viewDidLoad()
 
+        
         tableView.estimatedRowHeight = 44.0
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
 
         for h in homeStore.homeManager.homes
         {
-            print("\(h)")
+            print("\t\(__FUNCTION__):homeStore.homeManager.homes=\(h)")
         }
         
-        print("\(homeStore.home)")
+        print("\t\(__FUNCTION__):homeStore.home=\(homeStore.home)")
     }
     
     /// Resets the list of homes (which will update the view).
     override func viewWillAppear(animated: Bool) {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)-HomeListViewController")
         super.viewWillAppear(animated)
-        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         resetHomesList()
     }
     
@@ -60,6 +61,7 @@ class HomeListViewController: HMCatalogViewController, HMHomeManagerDelegate {
         homes list.
     */
     override func registerAsDelegate() {
+        print("\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)")
         homeManager.delegate = self
 
         for home in homes {
@@ -158,10 +160,10 @@ class HomeListViewController: HMCatalogViewController, HMHomeManagerDelegate {
 
         for h in homeStore.homeManager.homes
         {
-            print("\(h)")
+            print("\t.\(__FUNCTION__):homeStore.homeManager.homes=\(h)")
         }
         
-        print("\(homeStore.home)")
+        print("\t.\(__FUNCTION__):homeStore.home=\(homeStore.home)")
         tableView.reloadData()
     }
     

@@ -11,20 +11,20 @@ import HomeKit
 
 /// A view controller which displays a list of `HMServices`, separated by Service Type.
 class ControlsViewController: HMCatalogViewController, HMAccessoryDelegate {
-    // MARK: Types
+    // MARK: - Types
     
     struct Identifiers {
         static let showServiceSegue = "Show Service"
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var tableViewDataSource: ControlsTableViewDataSource!
     var cellController = AccessoryUpdateController()
     
     @IBOutlet weak var addButton: UIBarButtonItem!
     
-    // MARK: View Methods
+    // MARK: - View Methods
     
     /// Sends the selected service into the destination view controller.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -55,7 +55,7 @@ class ControlsViewController: HMCatalogViewController, HMAccessoryDelegate {
         reloadData()
     }
     
-    // MARK: Helper Methods
+    // MARK: - Helper Methods
     
     private func reloadData() {
         tableViewDataSource.reloadTable()
@@ -69,7 +69,7 @@ class ControlsViewController: HMCatalogViewController, HMAccessoryDelegate {
         }
     }
     
-    // MARK: Delegate Registration
+    // MARK: - Delegate Registration
     
     /// Registers as the delegate for the current home and all accessories in the home.
     override func registerAsDelegate() {
@@ -84,7 +84,7 @@ class ControlsViewController: HMCatalogViewController, HMAccessoryDelegate {
         table view data source.
     */
     
-    // MARK: HMHomeDelegate Methods
+    // MARK: - HMHomeDelegate Methods
     
     func home(home: HMHome, didAddAccessory accessory: HMAccessory)  {
         accessory.delegate = self
@@ -95,7 +95,7 @@ class ControlsViewController: HMCatalogViewController, HMAccessoryDelegate {
         reloadData()
     }
 
-    // MARK: HMAccessoryDelegate Methods
+    // MARK: - HMAccessoryDelegate Methods
     
     func accessoryDidUpdateReachability(accessory: HMAccessory) {
         reloadData()
